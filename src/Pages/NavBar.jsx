@@ -7,9 +7,11 @@ const NavBar = () => {
 
   const navitems = (
     <>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/allwatches">All-watches</Link></li>
-      <li><Link to="/add-a-watch">Add a watch</Link></li>
+      <li><Link to="/">Home <span className='hidden lg:inline text-white'> | </span></Link></li>
+      <li><Link to="/">Pages <span className='hidden lg:inline text-white'> | </span></Link></li>
+      <li><Link to="/">Brands <span className='hidden lg:inline text-white'> | </span></Link></li>
+      <li><Link to="/allwatches">All-watches <span className='hidden lg:inline text-white'> | </span></Link></li>
+      <li><Link to="/add-a-watch">Add a watch <span className='hidden lg:inline text-white'> | </span></Link></li>
       {user && <li><Link to="/mywatches">My watches</Link></li>}
       <li><Link to="/blog">Blog</Link></li>
     </>
@@ -17,11 +19,11 @@ const NavBar = () => {
   );
 
   return (
-    <div className="navbar bg-dark">
+    <div className="navbar bg-dark section-padding">
       <div className="navbar-start max-h-20">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             {navitems}
@@ -40,7 +42,7 @@ const NavBar = () => {
       <div className="navbar-end">
         {
           user ? (<>
-            <button onClick={logOut} className="btn btn-primary">Log out</button>
+            <button onClick={logOut} className="btn btn-sm btn-outline btn-primary">Log out</button>
             <img
               src={user.photoURL}
               className='w-10 h-10 rounded-full'
@@ -48,7 +50,7 @@ const NavBar = () => {
             />
             <Tooltip id="my-tooltip" place="top" offset = "{'bottom': 50}"/>
           </>) :
-            (<Link to="/login" className="btn btn-primary">Login</Link>)
+            (<Link to="/login" className="btn btn-sm btn-outline btn-primary">Login</Link>)
         }
       </div>
     </div>

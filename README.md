@@ -8,4 +8,4 @@ This project is built using React with DaisyUi-tailwind css and includes the fol
 * Responsive design for mobile and desktop devices
 * Integration with third-party APIs
 ## Live Link
-https://wristify-101.web.app/
+https://wristify.web.app
