@@ -3,12 +3,12 @@ import { GoLocation,GoMail} from "react-icons/go";
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-dark text-primary mx-auto justify-around">
+        <footer className="footer p-10 bg-dark text-white mx-auto justify-around">
             <div className="">
                 <span className="footer-title">About us</span>
-                <img src="logo.png" className="h-20 w-20"></img>
-                <h1>wristify</h1>
-                <p>The largest online toyshop since 1995</p>
+                <img src="logo.png" className="h-20 w-40"></img>
+               
+                <p>The largest online watch shop since 1995</p>
                 <p> &copy; 2023 wristify All Rights Reserved</p>
             </div>
             <div className="">

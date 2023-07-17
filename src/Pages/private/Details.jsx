@@ -7,11 +7,11 @@ const Details = () => {
     const toy = useLoaderData();
     const { name, description, pictureURL, quantity, rating, sellerEmail, sellerName, price } = toy;
     return (
-        <div className="card md:h-[90vh]  md:w-[80%] w-full lg:card-side bg-base-100 shadow-xl mx-auto mb-10">
-            <figure className="p-5 md:min-w-[40%] w-full rounded-lg"><img src={pictureURL} className="w-full h-full cover rounded-lg" /></figure>
-            <div className="card-body">
-                <div className="flex gap-2 my-5">
-                    <h2 className="card-title">{name}</h2>
+        <div className="card section-padding lg:card-side shadow-xl my-10 rounded-none">
+            <figure className="p-5 h-96 w-full rounded-lg"><img src={pictureURL} className="w-full h-full object-contain rounded-lg" /></figure>
+            <div className="card-body text-white">
+                <div className="flex flex-col gap-2 my-5">
+                    <h2 className="card-title text-4xl">{name}</h2>
                     <StarRating rating={rating}></StarRating>
                 </div>
                 <p>Description: {description}</p>

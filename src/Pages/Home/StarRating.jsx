@@ -18,6 +18,6 @@ function StarRating({ rating }) {
         return stars;
     };
 
-    return <div className='flex items-center justify-center' >{renderStars()}</div>;
+    return <div className='max-w-min flex items-center justify-center' >{renderStars()}</div>;
 }
 export default StarRating;
