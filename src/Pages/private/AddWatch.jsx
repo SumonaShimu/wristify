@@ -3,8 +3,8 @@ import { AuthContext } from "../AuthProvider";
 import Swal from "sweetalert2";
 import useTitle from "../Home/Hooks/useTitle";
 
-const AddToy = () => {
-    useTitle('addToy')
+const AddWatch = () => {
+    useTitle('AddWatch')
     const { user } = useContext(AuthContext);
     let userName = '', userEmail = ''
     if (user) {
@@ -47,7 +47,7 @@ const AddToy = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Toy inserted successfully',
+                    title: 'Watch inserted successfully',
                     showConfirmButton: false,
                     timer: 1500
                   })
@@ -57,19 +57,19 @@ const AddToy = () => {
         console.log(itemjson)
     }
     return (
-        <div>
+        <div className="w-full my-10 section-padding">
            <div className="text-center">
-           <h1 className='font-bold text-4xl py-5'>Add a Toy</h1>
-            <p className=''>Here, you as a seller can post your toys with the respective information.</p>
+           <h1 className='font-bold text-4xl py-5'>Add a Watch</h1>
+            <p className='text-white'>Here, you as a seller can post your watches with the respective information.</p>
            </div>
-            <form onSubmit={addItem} className="bg-primary rounded-xl m-10 p-10 grid md:grid-cols-2 grid-cols-1 gap-3 w-[90%]">
+            <form onSubmit={addItem} className="bg-white/50 text-white rounded-xl m-10 p-10 grid md:grid-cols-2 grid-cols-1 gap-3 w-[90%]">
                 <label className="input-group">
                     <span>Picture</span>
                     <input name='url' type="url" placeholder="give the product image url" className="input input-bordered w-full" />
                 </label>
                 <label className="input-group">
-                    <span>Toy Name</span>
-                    <input name='name' type="text" placeholder="toy name" className="input input-bordered w-full" />
+                    <span>Watch Name</span>
+                    <input name='name' type="text" placeholder="watch name" className="input input-bordered w-full" />
                 </label>
                 <label className="input-group">
                     <span>Seller Name</span>
@@ -98,9 +98,9 @@ const AddToy = () => {
                     <span>Sub Category</span>
                     <select className="select select-bordered" onChange={handleSelectChange} value={selectedValue}>
                         <option disabled value="">Pick one</option>
-                        <option value="Geography">Geography</option>
-                        <option value="Problem-Solving">Problem-Solving</option>
-                        <option value="Math">Math and Counting</option>
+                        <option value="sports">sports</option>
+                        <option value="luxury">luxury</option>
+                        <option value="ladies">ladies watches</option>
                         <option value="Others">Others</option>
                     </select>
                 </label>
@@ -108,10 +108,10 @@ const AddToy = () => {
                     <span>Description</span>
                     <input name='description' type="text" placeholder="your product description" className="input input-bordered w-full h-24" />
                 </label>
-                <input type="submit" value="Add Product" className="btn btn-secondary text-white col-span-2 mx-auto"/>
+                <input type="submit" value="Add Product" className="btn btn-success col-span-2 mx-auto"/>
             </form>
         </div>
     );
 };
 
-export default AddToy;
+export default AddWatch;

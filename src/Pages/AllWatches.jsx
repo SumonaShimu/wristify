@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import useTitle from "./Home/Hooks/useTitle";
 
-const AllToys = () => {
-    useTitle('allToys')
-    const alltoys = useLoaderData();
-    const [toys,setToys]=useState(alltoys);
+const AllWatches = () => {
+    useTitle('allWatches')
+    const allwatches = useLoaderData();
+    const [watchs,setWatch]=useState(allwatches);
 
     const handleSearch=(e)=>{
         e.preventDefault();
@@ -14,22 +14,22 @@ const AllToys = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
-            setToys(data)})
+            setWatch(data)})
     }
 
-    console.log(toys)
+    console.log(watchs)
     return (
-        <div className="overflow-x-auto m-5">
+        <div className="overflow-x-auto m-5 text-white">
             <form onSubmit={handleSearch} className="w-full flex justify-center gap-4 my-5">
-            <input type="text" name='searchText' placeholder="Toy Name or Category" className="input input-bordered" required/>
-            <input type="submit" className="btn btn-secondary text-white" value="Search" />
+            <input type="text" name='searchText' placeholder="Search by Name" className="input input-bordered" required/>
+            <input type="submit" className="btn btn-success" value="Search" />
             </form>
             <table className="table table-compact w-full text-center">
                 <thead>
                     <tr>
                         <th></th>
                         <th>Saller</th>
-                        <th>Toy-name</th>
+                        <th>Model-name</th>
                         <th>Sub-Category</th>
                         <th>Price</th>
                         <th>Available</th>
@@ -38,17 +38,17 @@ const AllToys = () => {
                 </thead>
                 <tbody>
                     {
-                        toys.map((toy, i) => {
-                            console.log(toy);
-                            return <tr key={toy._id}>
+                        watchs.map((watch, i) => {
+                            console.log(watch);
+                            return <tr key={watch._id}>
                                 <th>{i + 1}</th>
-                                <td>{toy.sellerName}</td>
-                                <td>{toy.name}</td>
-                                <td>{toy.subcategory}</td>
-                                <td>${toy.price}</td>
-                                <td>{toy.quantity}</td>
+                                <td>{watch.sellerName}</td>
+                                <td>{watch.name}</td>
+                                <td>{watch.subcategory}</td>
+                                <td>${watch.price}</td>
+                                <td>{watch.quantity}</td>
                                 <td>
-                                    <Link to={`/details/${toy._id}`} className='btn btn-primary rounded-t-none'>View Details</Link>
+                                    <Link to={`/details/${watch._id}`} className='btn btn-primary btn-outline btn-sm rounded-full'>View Details</Link>
                                 </td>
                             </tr>
                         }
@@ -61,4 +61,4 @@ const AllToys = () => {
     );
 };
 
-export default AllToys;
+export default AllWatches;

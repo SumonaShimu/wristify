@@ -4,10 +4,10 @@ import { AuthContext } from "../AuthProvider";
 import Swal from "sweetalert2";
 import useTitle from "../Home/Hooks/useTitle";
 
-const MyToys = () => {
-    useTitle('Mytoys')
+const MyWatches = () => {
+    useTitle('MyWatches')
     const { user } = useContext(AuthContext);
-    const [toys, setToys] = useState([]);
+    const [watches, setWatchs] = useState([]);
     const [control,setControl]=useState(false);
     const [ascending, setAscending] = useState([])
     const swalWithBootstrapButtons = Swal.mixin({
@@ -17,13 +17,13 @@ const MyToys = () => {
         },
         buttonsStyling: false
     })
-    //getting my uploaded toys
+    //getting my uploaded watches
     const url = `https://wristify-server.vercel.app/mywatches?email=${user?.email}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                setToys(data)
+                setWatchs(data)
                 setAscending(data)
                 console.log(data)
             })
@@ -31,8 +31,8 @@ const MyToys = () => {
 
 
     const descending = [...ascending].sort((a, b) => b.price - a.price);
-    //update toys
-    const updateToy = (id) => {
+    //update watches
+    const updateWatch = (id) => {
         event.preventDefault();
         console.log('entered')
         const form = event.target;
@@ -40,17 +40,17 @@ const MyToys = () => {
         const price = parseFloat(form.price.value);
         const quantity = parseFloat(form.quantity.value);
         const rating = parseFloat(form.rating.value);
-        const updatedToy = {
+        const updatedWatch = {
             description, price, quantity, rating
         }
-        console.log(id, updatedToy)
+        console.log(id, updatedWatch)
 
         fetch(`https://wristify-server.vercel.app/watch/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(updatedToy)
+            body: JSON.stringify(updatedWatch)
         })
             .then(res => res.json())
             .then(data => {
@@ -58,7 +58,7 @@ const MyToys = () => {
                 if (data.modifiedCount > 0) {
                     Swal.fire(
                         'Done!',
-                        'Toy Updated successfully!',
+                        'Watch Updated successfully!',
                         'success'
                     )
                     setControl(!control);
@@ -66,8 +66,8 @@ const MyToys = () => {
                 
             })
     }
-    //delete toys
-    const deleteToy = (id) => {
+    //delete watches
+    const deleteWatch = (id) => {
         console.log('delete', id);
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
@@ -82,7 +82,7 @@ const MyToys = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Your Toy has been deleted',
+                    title: 'Your Watch has been deleted',
                     showConfirmButton: false,
                     timer: 1000
                 })
@@ -93,8 +93,8 @@ const MyToys = () => {
                     .then(data => {
                         console.log(data);
                         if (data.deletedCount > 0) {
-                            const remaining = toys.filter(user => user._id !== id);
-                            setToys(remaining);
+                            const remaining = watches.filter(user => user._id !== id);
+                            setWatchs(remaining);
                         }
                     })
             } else if (
@@ -103,7 +103,7 @@ const MyToys = () => {
             ) {
                 swalWithBootstrapButtons.fire(
                     'Cancelled',
-                    'Your Toy is safe! :)',
+                    'Your Watch is safe! :)',
                     'error'
                 )
             }
@@ -112,16 +112,16 @@ const MyToys = () => {
 
     return (
         <div className="text-center">
-            <h1 className='font-bold text-4xl py-5'>My Toys</h1>
-            <p className=''>Here, you as a seller can update, delete or modify your toys.</p>
-            <button onClick={() => setToys(ascending)} className="btn btn-success mt-5">Ascending</button>
-            <button onClick={() => setToys(descending)} className="btn btn-error ml-3 mb-5">Descending</button>
-            <table className="table table-compact w-full my-10">
+            <h1 className='font-bold text-4xl py-10'>My Watches</h1>
+            <p className='text-white'>Here, you as a seller can update, delete or modify your watches.</p>
+            <button onClick={() => setWatchs(ascending)} className="btn btn-success mt-5">Ascending</button>
+            <button onClick={() => setWatchs(descending)} className="btn btn-error ml-3 mb-5">Descending</button>
+            <table className="table table-compact w-full my-10 text-white">
                 <thead>
                     <tr>
                         <th></th>
                         <th>Saller</th>
-                        <th>Toy-name</th>
+                        <th>Watch-name</th>
                         <th>Sub-Category</th>
                         <th>Price</th>
                         <th>Available</th>
@@ -131,40 +131,40 @@ const MyToys = () => {
                 </thead>
                 <tbody>
                     {
-                        toys.map((toy, i) => {
-                            console.log(toy);
-                            return <tr key={toy._id}>
+                        watches.map((watch, i) => {
+                            console.log(watch);
+                            return <tr key={watch._id}>
                                 <th>{i + 1}</th>
-                                <td>{toy.sellerName}</td>
-                                <td>{toy.name}</td>
-                                <td>{toy.subcategory}</td>
-                                <td>${toy.price}</td>
-                                <td>{toy.quantity}</td>
+                                <td>{watch.sellerName}</td>
+                                <td>{watch.name}</td>
+                                <td>{watch.subcategory}</td>
+                                <td>${watch.price}</td>
+                                <td>{watch.quantity}</td>
                                 <td>
-                                    <label htmlFor={`modal-${toy._id}`} className="btn btn-primary rounded-full"><RiEdit2Fill></RiEdit2Fill></label>
-                                    <input type="checkbox" id={`modal-${toy._id}`} className="modal-toggle" />
+                                    <label htmlFor={`modal-${watch._id}`} className="btn btn-primary rounded-full"><RiEdit2Fill></RiEdit2Fill></label>
+                                    <input type="checkbox" id={`modal-${watch._id}`} className="modal-toggle" />
                                     <div className="modal">
                                         <div className="modal-box bg-slate-200">
-                                            <form onSubmit={() => updateToy(toy._id)} className="bg-primary rounded-xl m-3 p-5 grid grid-cols-1 gap-3 w-[90%] mx-auto">
-                                                <h1 className="text-center font-semibold text-2xl">{toy.name}</h1>
+                                            <form onSubmit={() => updateWatch(watch._id)} className="bg-primary rounded-xl m-3 p-5 grid grid-cols-1 gap-3 w-[90%] mx-auto">
+                                                <h1 className="text-center font-semibold text-2xl">{watch.name}</h1>
                                                 <label className="input-group">
                                                     <span>Price</span>
-                                                    <input name="price" type="number" step="0.01" defaultValue={toy.price} placeholder="100.00" className="input input-bordered w-full" />
+                                                    <input name="price" type="number" step="0.01" defaultValue={watch.price} placeholder="100.00" className="input input-bordered w-full" />
                                                 </label>
                                                 <label className="input-group">
                                                     <span>Rating</span>
-                                                    <input name="rating" type="number" step="0.01" defaultValue={toy.rating} placeholder="5" className="input input-bordered w-full" />
+                                                    <input name="rating" type="number" step="0.01" defaultValue={watch.rating} placeholder="5" className="input input-bordered w-full" />
                                                 </label>
                                                 <label className="input-group">
                                                     <span>Available quantity</span>
-                                                    <input name="quantity" type="number" defaultValue={toy.quantity} placeholder="10" className="input input-bordered w-full" />
+                                                    <input name="quantity" type="number" defaultValue={watch.quantity} placeholder="10" className="input input-bordered w-full" />
                                                 </label>
                                                 <label className="input-group">
                                                     <span>Description</span>
-                                                    <input name="description" type="text" defaultValue={toy.description} placeholder="your product description" className="input input-bordered w-full h-24" />
+                                                    <input name="description" type="text" defaultValue={watch.description} placeholder="your product description" className="input input-bordered w-full h-24" />
                                                 </label>
                                                 <div className="modal-action">
-                                                    <button type="submit" className="btn"><label htmlFor={`modal-${toy._id}`}  >Update</label></button>
+                                                    <button type="submit" className="btn"><label htmlFor={`modal-${watch._id}`}  >Update</label></button>
                                                 </div>
 
                                             </form>
@@ -175,7 +175,7 @@ const MyToys = () => {
 
                                 </td>
                                 <td>
-                                    <button onClick={() => deleteToy(toy._id)} className='btn btn-primary rounded-full'><RiDeleteBinFill></RiDeleteBinFill> </button>
+                                    <button onClick={() => deleteWatch(watch._id)} className='btn btn-primary rounded-full'><RiDeleteBinFill></RiDeleteBinFill> </button>
                                 </td>
                             </tr>
                         }
@@ -188,4 +188,4 @@ const MyToys = () => {
     );
 };
 
-export default MyToys;
+export default MyWatches;

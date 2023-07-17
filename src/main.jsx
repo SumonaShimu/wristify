@@ -9,15 +9,17 @@ import MainLayout from './Pages/Home/MainLayout.jsx';
 import Main from './Pages/Home/Main.jsx';
 import Login from './Pages/Login/Login.jsx';
 import Registration from './Pages/Registration/Registration.jsx';
-import AllToys from './Pages/AllToys';
-import AddToy from './Pages/private/AddToy';
+import AddToy from './Pages/private/AddWatch';
 import AuthProvider from './Pages/AuthProvider';
 import PrivateRoute from './Pages/private/PrivateRoute';
 import Details from './Pages/private/Details';
-import MyToys from './Pages/private/MyToys';
+import MyToys from './Pages/private/MyWatches';
 import Error from './Pages/Error';
 import { ToastContainer } from 'react-toastify';
 import Blog from './Pages/Blog';
+import AllWatches from './Pages/AllWatches';
+import AddWatch from './Pages/private/AddWatch';
+import MyWatches from './Pages/private/MyWatches';
 
 
 const router = createBrowserRouter([
@@ -30,13 +32,13 @@ const router = createBrowserRouter([
         element: <Main />
       },
       {
-        path: "/alltoys",
-        element: <AllToys></AllToys>,
+        path: "/allwatches",
+        element: <AllWatches/>,
         loader:()=>fetch('https://wristify-server.vercel.app/allwatches')
       },
       {
-        path: "/add-a-toy",
-        element: <PrivateRoute><AddToy></AddToy></PrivateRoute>,
+        path: "/add-a-watch",
+        element: <PrivateRoute><AddWatch></AddWatch></PrivateRoute>,
       },
       {
         path: "/details/:id",
@@ -44,8 +46,8 @@ const router = createBrowserRouter([
         loader:({params})=>fetch(`https://wristify-server.vercel.app/watch/${params.id}`)
       },
       {
-        path: "/mytoys",
-        element: <PrivateRoute><MyToys></MyToys></PrivateRoute>,
+        path: "/mywatches",
+        element: <PrivateRoute><MyWatches></MyWatches></PrivateRoute>,
       },
       {
         path: "/login",

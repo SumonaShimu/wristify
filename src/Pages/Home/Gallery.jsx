@@ -1,6 +1,6 @@
 import GalleryCard from "./GalleryCard";
 
-const Gallery = ({ allToys }) => {
+const Gallery = ({ allWatches }) => {
     
     return (
         <div data-aos="fade-up" className='section-padding'>
@@ -10,7 +10,7 @@ const Gallery = ({ allToys }) => {
             </div>
             {/* cards from json */}
             <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3 mx-5 my-10">
-                {allToys.slice(0,8).map(item =><GalleryCard key={item._id} item={item}></GalleryCard>
+                {allWatches.slice(0,8).map(item =><GalleryCard key={item._id} item={item}></GalleryCard>
                 )}
 
             </div>
